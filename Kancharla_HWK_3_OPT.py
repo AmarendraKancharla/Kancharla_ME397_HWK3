@@ -76,3 +76,17 @@ def SOC_const(model, i):
     return model.ESS_SOC[i] == model.ESS_SOC[i-1] + (model.ESS_c[i] * ESS_eta_c) - (model.ESS_d[i]/ESS_eta_d)
 model.SOC_const = Constraint(model.t, rule = SOC_const)
 
+# create instance of the model (abstract only)
+model = model.create_instance(data)
+
+# look at model attributes
+# model.t.pprint()
+
+# solve the model
+opt = SolverFactory('glpk')
+# opt = SolverFactory('gurobi')
+status = opt.solve(model) 
+
+# write model outputs to a JSON file
+model.solutions.store_to(status)
+status.write(filename='Kancharla_HWK3_OPT_OUTPUTS.json', format='json')
