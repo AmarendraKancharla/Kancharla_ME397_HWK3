@@ -30,9 +30,9 @@ model.costs = Param(model.tech, initialize={'s_cap' : solar_cap_cost, 'w_cap' : 
 
 ## load data into parameters, solar and wind data are houlry capacity factor data
 data = DataPortal()
-data.load(filename = 'opt_model_data/wind_solar_cf.csv', select = ('t', 'solar'), param = model.solar, index = model.t)
-data.load(filename = 'opt_model_data/wind_solar_cf.csv', select = ('t', 'wind'), param = model.wind, index = model.t)
-data.load(filename = 'opt_model_data/wind_solar_cf.csv', select = ('t', 'demand'), param = model.demand, index = model.t)
+data.load(filename = '2022_ERCOT_data.csv', select = ('t', 'solar'), param = model.solar, index = model.t)
+data.load(filename = '2022_ERCOT_data.csv', select = ('t', 'wind'), param = model.wind, index = model.t)
+data.load(filename = '2022_ERCOT_data.csv', select = ('t', 'demand'), param = model.demand, index = model.t)
 
 ## define variables
 model.cap = Var(model.tech, domain = NonNegativeReals)
