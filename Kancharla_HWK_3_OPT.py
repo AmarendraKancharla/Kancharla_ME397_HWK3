@@ -34,3 +34,10 @@ data.load(filename = 'opt_model_data/wind_solar_cf.csv', select = ('t', 'solar')
 data.load(filename = 'opt_model_data/wind_solar_cf.csv', select = ('t', 'wind'), param = model.wind, index = model.t)
 data.load(filename = 'opt_model_data/wind_solar_cf.csv', select = ('t', 'demand'), param = model.demand, index = model.t)
 
+## define variables
+model.cap = Var(model.tech, domain = NonNegativeReals)
+model.ESS_SOC = Var(model.t, domain = NonNegativeReals)
+model.ESS_c = Var(model.t, domain = NonNegativeReals)
+model.ESS_d = Var(model.t, domain = NonNegativeReals)
+model.curt = Var(model.t, domain = NonNegativeReals)
+
