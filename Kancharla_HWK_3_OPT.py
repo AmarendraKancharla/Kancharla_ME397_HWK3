@@ -15,5 +15,18 @@ ESS_min_level = 0.20 # %, minimum level of discharge of the battery
 ESS_eta_c = 0.95 # ESS charging efficiency, looses 5% when charging
 ESS_eta_d = 0.9 # ESS discharging efficiency, looses 10% when discharging
 ESS_p_var_cost = 5000 # ESS discharge cost $/GWh
-#curtailment_cost = 0.001 # curtailment penalty $/kWh
+curtailment_cost = 1000 # curtailment penalty $/GWh
+
+# create the model
+model = AbstractModel(name = 'solar-wind-storage model')
+
+# create model sets
+model.t = Set(initialize = [i for i in range(8760)], ordered=True)
+model.tech = Set(initialize =['s_cap', 'w_cap','ESS_power_cap','ESS_energy_cap'], ordered=True)
+model.solar = Param(model.t)
+model.wind  = Param(model.t)
+model.demand = Param(model.t)
+model.costs = Param(model.tech, initialize={'s_cap' : solar_cap_cost, 'w_cap' : wind_cap_cost,'ESS_power_cap' : ESS_p_cap_cost, 'ESS_energy_cap' : ESS_e_cap_cost})
+
+
 
