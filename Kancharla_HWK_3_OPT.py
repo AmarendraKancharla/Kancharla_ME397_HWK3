@@ -28,5 +28,9 @@ model.wind  = Param(model.t)
 model.demand = Param(model.t)
 model.costs = Param(model.tech, initialize={'s_cap' : solar_cap_cost, 'w_cap' : wind_cap_cost,'ESS_power_cap' : ESS_p_cap_cost, 'ESS_energy_cap' : ESS_e_cap_cost})
 
-
+## load data into parameters, solar and wind data are houlry capacity factor data
+data = DataPortal()
+data.load(filename = 'opt_model_data/wind_solar_cf.csv', select = ('t', 'solar'), param = model.solar, index = model.t)
+data.load(filename = 'opt_model_data/wind_solar_cf.csv', select = ('t', 'wind'), param = model.wind, index = model.t)
+data.load(filename = 'opt_model_data/wind_solar_cf.csv', select = ('t', 'demand'), param = model.demand, index = model.t)
 
